@@ -27,11 +27,11 @@ let tiles = roomArea() / 1.5
 let roomLength = 6.0
 let roomWidth = 4.5
 
-func roomArea() -> Double {
+func roomArea2() -> Double {
     return roomLength * roomWidth
 }
 
-fun LargeRoom() -> Bool {
+func  LargeRoom() -> Bool {
     return true
 
 func area(length: Double, width: Double) -> Double {
