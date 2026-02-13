@@ -15,27 +15,27 @@ func roomHeight() -> Double {
     return 2.7
 }
 
-let height = roomHeight()
+//let height = roomHeight()
 
-func roomArea() -> Double {
-    return 6.0 * 4.5
+//func roomArea() -> Double {
+    //return 6.0 * 4.5
 }
 
-let tiles = roomArea() / 1.5
+//let tiles = roomArea() / 1.5
 
 
-let roomLength = 6.0
-let roomWidth = 4.5
+//let roomLength = 6.0
+//let roomWidth = 4.5
 
-func roomArea2() -> Double {
-    return roomLength * roomWidth
+//func roomArea2() -> Double {
+ //   return roomLength * roomWidth
 }
 
-func  LargeRoom() -> Bool {
-    return true
+//func  LargeRoom() -> Bool {
+   // return true
 
-func area(length: Double, width: Double) -> Double {
-    return length * width
+//func area(length: Double, width: Double) -> Double {
+    //return length * width
 }
 
 // print(area(length: 6.0, width: 4.5) = 27.0)
