@@ -36,11 +36,6 @@ func roomHeight() -> Double {
 
 //func area(length: Double, width: Double) -> Double {
     //return length * width
-}
 
 // print(area(length: 6.0, width: 4.5) = 27.0)
 // print(area(length: 2.0, width: 3.0) == 6.0)
-
-} 
-    }
-}
