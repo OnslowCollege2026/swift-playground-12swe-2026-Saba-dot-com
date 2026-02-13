@@ -9,7 +9,7 @@
             "target": "SwiftPlayground",
             "configuration": "debug",
             "preLaunchTask": "swift: Build Debug SwiftPlayground",
-            "disableASLR": false,
+                        "disableASLR": false,
             "initCommands": [
                 "settings set target.disable-aslr false"
             ],
@@ -24,7 +24,7 @@
             "target": "SwiftPlayground",
             "configuration": "release",
             "preLaunchTask": "swift: Build Release SwiftPlayground",
-            "disableASLR": false,
+                        "disableASLR": false,
             "initCommands": [
                 "settings set target.disable-aslr false"
             ],
