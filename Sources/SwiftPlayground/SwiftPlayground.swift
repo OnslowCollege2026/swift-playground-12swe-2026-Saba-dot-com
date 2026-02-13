@@ -31,7 +31,7 @@ func roomArea() -> Double {
     return roomLength * roomWidth
 }
 
-func is LargeRoom() -> Bool {
+fun LargeRoom() -> Bool {
     return true
 
 func area(length: Double, width: Double) -> Double {
