@@ -35,7 +35,10 @@ struct SwiftPlayground {
         let usableVolume = roomVolume - totalFurnitureVolume
         print("Usuable volume: \(usableVolume) m³ ")
         }
+
+while var height < 0 {}
         }
+    
         }
     }
 }
