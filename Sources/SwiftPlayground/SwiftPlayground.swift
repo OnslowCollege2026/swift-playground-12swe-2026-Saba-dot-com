@@ -12,7 +12,9 @@ struct SwiftPlayground {
             print("Enter the room Width: ")
             if let userInput = readLine(), let roomWidth=Double(userInput) {
         print("Enter the room Height: ")
-
+        while var roomHeight < 0 {
+            print("Height is invalild")
+        }
         // Calculate area and volume of the room
         if let userInput = readLine(), let roomHeight=Double(userInput) {
                                   let area = roomLength * roomWidth
@@ -35,13 +37,10 @@ struct SwiftPlayground {
         let usableVolume = roomVolume - totalFurnitureVolume
         print("Usuable volume: \(usableVolume) m³ ")
         }
-
-while var height < 0 {}
+    }
         }
-    
         }
     }
-}
 
 // -------------------------------------------
 // NEXT: Part 8: Input validation (while loop)
