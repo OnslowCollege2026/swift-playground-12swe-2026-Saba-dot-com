@@ -34,7 +34,7 @@ struct SwiftPlayground {
 
         // TASK D
 
-        let isLarge = false
+        let isLarge = true
 
         if isLarge {
             let label = "This is a large room"
