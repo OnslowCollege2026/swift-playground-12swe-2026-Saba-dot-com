@@ -40,7 +40,7 @@ func stockMessage(stock: Int) -> String {
 }
 
 // Asks what user would like to do
-while userChoice < 1 || userChoice > 5 {
+while userChoice >= 1 || userChoice <= 5 {
 print("==== Egg Shop ====")
 print("1. Add eggs")
 print("2. Sell eggs")
@@ -54,9 +54,9 @@ if let userInput = readLine(), let choice = Int(userInput) {
     userChoice = choice
 } else {
     print("Invalid choice.")
-    return
 }  
 }
 
 }
+} 
 }
