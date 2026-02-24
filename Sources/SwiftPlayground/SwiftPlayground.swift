@@ -1,49 +1,92 @@
+
+
+
+func print(board: [[String]]) {
+    print("--+---+--")
+    board.forEach { line in
+        print("\(line[0]) | \(line[1]) | \(line[2])")
+        print("--+---+--")
+        
+    }
+    print(" ")
+}
+func askForPosition(board: [[String]]) -> [Int] {
+    while true {    
+        print("Please enter the row number 1-3: ")
+        let userInput = readLine()!
+        let rowNumber = Int(userInput)! - 1
+
+        print("Please enter the column number 1-3: ")
+        let userInput2 = readLine()!
+        let columnNumber = Int(userInput2)! - 1
+
+
+        if board[rowNumber][columnNumber] == "." {
+            return [rowNumber, columnNumber]
+        }
+    }
+}
+
 @main
 struct SwiftPlayground {
     static func main() {
-        var eggsInStock = 0
-        var eggsSold = 0
-        var userChoice = 0
+        var player = "O"
 
-       // func menuChoice() -> Int {
+        var board = [
+            [".", ".", "."], // Row 0
+            [".", ".", "."], // Row 1
+            [".", ".", "."]   // Row 2
+        ]
 
-        func addEggs(currentStock: Int, amount: Int) -> Int {
-                return currentStock + amount
-            }
-        
+        print(board: board)
 
-        func sellEggs(currentStock: Int, amount: Int) -> Int? {
-            if amount >= currentStock {
-                return currentStock - amount
+    while true {
+            let position = askForPosition(board: board)
+            board[position[0]] [position[1]] = player
+
+            if player == "O" {
+                player = "X"
             } else {
-                    print("You have an insufficiant amount of eggs.")
-                    }
+                player = "O"
             }
-        }
+                        print(board: board)
+        } 
 
-
-        func updateSoldCount(currentSold: Int, amount: Int) -> Int {
-            return currentSold + amount
-        }
-
-        func stockMessage(stock: Int) -> String {
         
-func runEggShop() {
-        // Asks what user would like to do
-        print("==== Egg Shop ====")
-        print("1. Add eggs")
-        print("2. Sell eggs")
-        print("3. Show current stock")
-        print("4. Show total eggs sold")
-        print("5. Exit")
-        print("Choose an option: ")
+        // First move: 0 in middle.
+        board[1][1] = "O"
+        print(board: board)
 
-        if let userInput = readLine(), let choice = Int(userInput) {
-            let userChoice = choice
-        } else {
-            print("Invalid choice.")
-        }
-        }
+        // Second move: Top left corner
+        board[0][0] = "X"
+        print(board: board)
 
-        }
+        // Third move: Top right corner
+        board[0][2] = "O"
+        print(board: board)
+
+        // Fourth move: Bottom left corner
+        board[2][0] = "X"
+        print(board: board)
+
+         // Fifth move: Middle left 
+        board[1][0] = "O"
+        print(board: board)
+
+         // Sixth move: Middle right 
+        board[1][2] = "O"
+        print(board: board)
+
+         // Seventh move: Middle right 
+        board[1][2] = "X"
+        print(board: board)
+
+         // Eighth move: Middle bottom 
+        board[2][1] = "O"
+        print(board: board)
+
+        // Ninth move: Middle bottom 
+        board[0][1] = "X"
+        print(board: board)
+    }
 }
