@@ -9,16 +9,17 @@ struct SwiftPlayground {
 
         func addEggs(currentStock: Int, amount: Int) -> Int {
                 return currentStock + amount
+                eggsInStock = currentStock + amount
             }
         
 
         func sellEggs(currentStock: Int, amount: Int) -> Int? {
             if amount >= currentStock {
                 return currentStock - amount
+                eggsInStock = currentStock - amount
             } else {
                     print("You have an insufficiant amount of eggs.")
                     }
-            }
         }
 
 
@@ -27,7 +28,8 @@ struct SwiftPlayground {
         }
 
         func stockMessage(stock: Int) -> String {
-        
+        // return 
+        }
 func runEggShop() {
         // Asks what user would like to do
         print("==== Egg Shop ====")
@@ -40,10 +42,19 @@ func runEggShop() {
 
         if let userInput = readLine(), let choice = Int(userInput) {
             let userChoice = choice
+            switch userChoice{
+                case 1:
+                print("How many eggs would you like to add?")
+                print(addEggs(currentStock: Int, amount: Int))
+
+
+
+                default:
+                print("Invalid choice.")
+            }
         } else {
             print("Invalid choice.")
         }
-        }
-
-        }
+    }
+}
 }
