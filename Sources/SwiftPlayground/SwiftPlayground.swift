@@ -1,7 +1,8 @@
 @main
 struct SwiftPlayground {
     static func main() {
-        var eggsInStock = 0
+        var eggsInStock = 10
+        var maximumAmount = 1000
         var eggsSold = 0
         var userChoice = 0
 
@@ -13,14 +14,14 @@ struct SwiftPlayground {
             }
         
 
-        func sellEggs(currentStock: Int, amount: Int) -> Int? {
+        func sellEggs(currentStock: Int, amount: Int) -> Int {
             if amount >= currentStock {
                 return currentStock - amount
                 eggsInStock = currentStock - amount
             } else {
                     print("You have an insufficiant amount of eggs.")
-                    }
-        }
+                }
+            }
 
 
         func updateSoldCount(currentSold: Int, amount: Int) -> Int {
@@ -45,8 +46,23 @@ func runEggShop() {
             switch userChoice{
                 case 1:
                 print("How many eggs would you like to add?")
-                print(addEggs(currentStock: Int, amount: Int))
+                if let input = readLine(), let amount = Int(input) {
+                    eggsInStock = addEggs(currentStock: eggsInStock, amount: amount)
+                }
+                print("You have sold \(eggsSold) eggs.")
 
+                case 2: 
+                print("How many eggs would you like to sell?")
+                if let input = readLine(), let amount = Int(input) {
+                    eggsSold = sellEggs(currentStock: eggsInStock, amount: amount) 
+                    
+                }
+            
+                case 3:
+                print("You have \(eggsInStock) eggs left.")
+
+                case 4:
+                print("You have sold \(eggsSold) eggs")
 
 
                 default:
