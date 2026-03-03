@@ -24,7 +24,7 @@ struct SwiftPlayground {
                     print("You have an insufficiant amount of eggs.")
                     return eggsInStock
                 }
-        
+        }
 
 
         func updateSoldCount(currentSold: Int, amount: Int) -> Int {
@@ -48,6 +48,12 @@ func runEggShop() {
         print("4. Show total eggs sold")
         print("5. Exit")
         print("Choose an option: ")
+
+// var running = true
+
+//while running {
+//    let choice = menuChoice()
+//}
 
             if let userInput = readLine(), let choice = Int(userInput) {
                 let userChoice = choice
@@ -83,8 +89,6 @@ func runEggShop() {
         runEggShop()
         return 0
     }
-
+menuChoice()
 }
-}
-
 }
