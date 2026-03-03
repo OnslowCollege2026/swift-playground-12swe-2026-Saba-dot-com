@@ -43,7 +43,7 @@ for row in table {
         print(value)
         count += value
     let total = count
-    }
+    } 
 
 }
 
