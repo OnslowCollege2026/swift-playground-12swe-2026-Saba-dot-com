@@ -6,8 +6,14 @@ struct SwiftPlayground {
             print("Welcome to the Koro cafe!")
         }
 
-    func showMenu() {
-        
+    func menuChoice() {
+        print("=== Koro Cafe ===")
+        print("1. Show menu")
+        print("2. Add item to order")
+        print("3. View order")
+        print("4. Checkout")
+        print("5. Quit")
+
     }
         
 }
