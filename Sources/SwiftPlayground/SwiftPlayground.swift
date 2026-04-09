@@ -6,6 +6,9 @@ struct SwiftPlayground {
             print("Welcome to the Koro cafe!")
         }
 
+    func showMenu() {
+        
+    }
         
 }
 }
