@@ -2,13 +2,6 @@
 struct SwiftPlayground {
     static func main() {
 
-        func showWelcome() {
-            print("Welcome to the Koro cafe!")
-        }
-
-        showWelcome()
-
-
         let menu = [
             ["Coffee", "4"],
             ["Tea", "3"],
@@ -54,13 +47,20 @@ struct SwiftPlayground {
             print(" ")
             print(" ")
             print(" ")
-            print("=== MENU ===")
+            print("==== THE ====")
+            print("==== MENU ====")
             for i in 0..<menu.count {
                 let itemName = menu[i][0]
                 let price = menu[i][1]
                 print("\(i + 1). \(itemName) - $\(price)")
             }
         }
+
+        func pause() {
+            print("\nPress any key to continue")
+            _ = readLine()
+        }
+
 
     func menuChoice() {
 
@@ -69,12 +69,25 @@ struct SwiftPlayground {
         while running {
             print("")
             print("")
+            print("")
+            print("")
+            print("")
+            print("")
+            print("")
+            print("")
+            print("")
+            print("")
+            print("")
+            print("")
+            print("")
+            print("")
             print("=== Koro Cafe ===")
             print("1. Show menu")
             print("2. Add item to order")
             print("3. View order")
             print("4. Checkout")
             print("5. Quit")
+            print("Enter an option: ")
 
 
             if let userInput = readLine(), let choice = Int(userInput) {
@@ -84,35 +97,37 @@ struct SwiftPlayground {
                     switch userChoice {
                         case 1:
                         printMenu(menu: menu)
-                        print("\nPress any key to continue")
-                        _ = readLine()
+                        pause()
 
                         case 2:
                         printMenu(menu: menu)
                         var validAnswer = false
                         while !validAnswer {
 
-                            print("Enter the item number")
+                            print("Enter the number of the item you want to add: ")
                             if let input2 = readLine(), let itemNumber = Int(input2) {
                                 if itemNumber >= 1 && itemNumber <= menu.count {
                                     let itemName = menu[itemNumber - 1][0]
                                     addItem(name: itemName, to: &order)
                                     validAnswer = true
                                 } else {
-                                    print("Invalid item number. Try again")
+                                    print("Invalid item number.")
                                 }
                             } else {
                                 print("Please enter a valid number.")
                             }
                         }
+                        pause()
 
                         case 3:
                         printOrder(order: order)
+                        pause()
 
                         case 4:
                         let total = calculateTotal(order: order, menu: menu)
                         print("Your total is $\(total)")
                         order.removeAll()
+                        pause()
 
                         case 5:
                         running = false
