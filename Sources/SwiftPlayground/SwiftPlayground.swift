@@ -3,10 +3,10 @@ struct SwiftPlayground {
     static func main() {
 
         let menu = [
-            ["Coffee", "4"],
-            ["Tea", "3"],
-            ["Muffin", "6"],
-            ["Sandwich", "9"]
+            ["Coffee", "4.0"],
+            ["Tea", "3.0"],
+            ["Muffin", "6.0"],
+            ["Sandwich", "9.0"]
         ]
 
         var order = [String]()
@@ -17,24 +17,30 @@ struct SwiftPlayground {
             print("\(name) has been added to your order!")
         }
 
-        func calculateTotal(order: [String], menu: [[String]]) -> Int {
-            var total = 0
+        func printReciept(order: [String], menu: [[String]]) -> Double {
+            var total = 0.0
+            print("Your GST inclusive total for: ")
 
             for item in order {
                 for menuItem in menu {
                     if menuItem[0] == item {
-                        if let price = Int(menuItem[1]) {
+                        print("\(item) - $\(menuItem[1])")
+                        if let price = Double(menuItem[1]) {
                             total += price
                         }
                     }
                 }
             }
-            return total
+
+            // Calculating GST inclusive price
+            let newTotal = total * 1.15
+            return newTotal
         }
 
         func printOrder(order: [String]) {
             if order.isEmpty {
                 print("No items added yet...")
+                pause()
             } else {
                 print("Your order: ")
                 for item in order {
@@ -57,9 +63,42 @@ struct SwiftPlayground {
         }
 
         func pause() {
-            print("\nPress any key to continue")
+            print("\nPress any key to return")
             _ = readLine()
         }
+
+        func removeItem() {
+            if order.isEmpty {
+                print("You haven't ordered anything yet. Please add items.")
+                pause()
+                return
+            }
+
+            while true {
+                print("\n===Your Order===")
+
+                for i in 0..<order.count {
+                    print("\(i + 1). \(order[i])")
+                }
+
+                print("\nSelect the number of the item you want to remove: ")
+
+                if let input = readLine(), let number = Int(input) {
+                    if number >= 1 && number <= order.count {
+                        let removed = order.remove(at: number - 1)
+                        print("\(removed) has been removed")
+                        pause()
+                        return
+                    } else {
+                        print("This number doesn't exist. Try again")
+                        continue
+                    }
+                } else {
+                    print("Invalid input. Try again.")
+                }
+            }
+        }
+
 
 
     func menuChoice() {
@@ -70,28 +109,18 @@ struct SwiftPlayground {
             print("")
             print("")
             print("")
-            print("")
-            print("")
-            print("")
-            print("")
-            print("")
-            print("")
-            print("")
-            print("")
-            print("")
-            print("")
-            print("")
             print("=== Koro Cafe ===")
             print("1. Show menu")
             print("2. Add item to order")
-            print("3. View order")
-            print("4. Checkout")
-            print("5. Quit")
+            print("3. Remove an item from order")
+            print("4. View order")
+            print("5. Checkout")
+            print("6. Quit")
             print("Enter an option: ")
 
 
             if let userInput = readLine(), let choice = Int(userInput) {
-                if choice <= 5 && choice >= 1 {
+                if choice <= 6 && choice >= 1 {
                     let userChoice = choice
                     
                     switch userChoice {
@@ -120,16 +149,24 @@ struct SwiftPlayground {
                         pause()
 
                         case 3:
-                        printOrder(order: order)
+                        removeItem()
                         pause()
 
                         case 4:
-                        let total = calculateTotal(order: order, menu: menu)
-                        print("Your total is $\(total)")
-                        order.removeAll()
-                        pause()
+                        printOrder(order: order)
 
                         case 5:
+                        if order.isEmpty {
+                            print("You don't have anything added in your cart")
+                            pause()
+                        } else {
+                            let total = printReciept(order: order, menu: menu)
+                            print("Your total (GST inclusive): $\(total)")
+                            order.removeAll()
+                            pause()
+                        }
+
+                        case 6:
                         running = false
 
                         default:
