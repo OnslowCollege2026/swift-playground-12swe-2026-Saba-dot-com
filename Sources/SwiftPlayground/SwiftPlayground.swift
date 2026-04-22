@@ -33,6 +33,10 @@ struct SwiftPlayground {
         }
 
         func sellKumara() {
+
+        }
+
+        func stallHistory(kumaraWeight: Double, bagAmount: Int) {
             
         }
 
