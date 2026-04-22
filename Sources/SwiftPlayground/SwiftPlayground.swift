@@ -12,8 +12,14 @@ struct SwiftPlayground {
             return currentStock
         }
 
-        func checkKumaraWeigth() -> String {
-            guard let kumaraWeight <= 0 
+        func addBag() {
+            var 
+        }
+
+        func checkKumaraWeigth(kumaraWeight: Int) -> String {
+            guard let kumaraWeight <= 0.1 && kumaraWeight >= 50.0 {
+                print("Invalid weight. Try again.")
+            }
         }
 }
 }
