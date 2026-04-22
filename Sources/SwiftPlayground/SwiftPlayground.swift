@@ -29,14 +29,26 @@ struct SwiftPlayground {
         }
 
         func calculateTotal(total: Double, kumaraWeight: Double) {
-            var kumaraCost = kumaraWeight 
+            var kumaraCost = kumaraWeight * 3
+        }
+
+        func sellKumara() {
+            
         }
 
 
+
     func runKumaraStall() {
+        print("Welcome to the Kumara Stall")
 
+        func printMenu() {
+        
+            print("Enter the number")
+            print("1. ")
+            print("3. Print reciept")
+            print("")
     
-
+        }
     }
 }
 }
