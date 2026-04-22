@@ -31,5 +31,12 @@ struct SwiftPlayground {
         func calculateTotal(total: Double, kumaraWeight: Double) {
             var kumaraCost = kumaraWeight 
         }
+
+
+    func runKumaraStall() {
+
+    
+
+    }
 }
 }
