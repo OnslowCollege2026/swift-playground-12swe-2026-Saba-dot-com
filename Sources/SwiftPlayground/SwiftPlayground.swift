@@ -49,29 +49,39 @@ struct SwiftPlayground {
         }
 
 
+    var isRunning = true
 
-    func runKumaraStall() {
-        print("Welcome to the Kumara Stall")
-        print("Enter 1 if you are a customer: ")
-        print("Enter 2 if you are the owner: ")
+    while isRunning {
 
-        if let userInput = readLine(), let choice = Int(userInput) {
-            if choice <= 2 && choice >= 1 {
-                let userChoice = choice
-                
-                switch choice
-                case 1: 
-                    printUserMenu()
+        func runKumaraStall() {
+            print("Welcome to the Kumara Stall")
+            print("Enter 1 if you are a customer: ")
+            print("Enter 2 if you are the owner: ")
+            print("Enter 3 to quit.")
 
+            if let userInput = readLine(), let choice = Int(userInput) {
+                if choice <= 2 && choice >= 1 {
+                    let userChoice = choice
+                    
+                    switch userChoice {
+                    case 1: 
+                        printUserMenu()
+                    case 2:
+                        printOwnerMenu()
+                    case 3:
+                        
+                    default:
+                        print("Invalid choice, try again")
+                    }
+                }
+            }
 
-
-        func printUserMenu() {
-        
-            print("Enter the number")
-            print("1. ")
-            print("3. Print reciept")
-            print("")
-    
+            func printUserMenu() {
+            
+                print("Enter the number")
+                print("1. Buy Kumara")
+                print("2. Print reciept")
+            }
         }
     }
 }
