@@ -58,13 +58,11 @@ struct SwiftPlayground {
         if let userInput = readLine(), let choice = Int(userInput) {
             if choice <= 2 && choice >= 1 {
                 let userChoice = choice
-                if choice == 1 {
+                
+                switch choice
+                case 1: 
                     printUserMenu()
-                } else if choice == 2 {
-                    printOwnerMenu()
-                } else {
-                    print("Invalid choice")
-                }
+
 
 
         func printUserMenu() {
