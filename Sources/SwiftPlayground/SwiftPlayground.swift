@@ -10,7 +10,8 @@ struct SwiftPlayground {
                 if amount <= 50.0 && amount >= 0.1 {
                     if amount + currentStock <= currentStock {
                         var kumaraInStock = currentStock + amount
-                        return kumaraInStock   
+                        var currentStock = kumaraInStock
+                        return kumaraInStock
                     } else {
                         print("The container cannot hold that much. Enter another amount.")
                     }
@@ -22,6 +23,7 @@ struct SwiftPlayground {
                     addKumara(currentStock: currentStock, amount: amount)
                 }
             }
+        }
 
         func viewCurrentStock(currentStock: Double) -> Double {
             if currentStock <= 0 {
@@ -35,6 +37,7 @@ struct SwiftPlayground {
         func addBag(kumaraWeight: Double) {
             var bagAmount = kumaraWeight / 3
         }
+        var bagAmount = addBag(kumaraWeight:)
 
         //func checkKumaraWeigth(kumaraWeight: Double) -> String {
           //  if let kumaraWeight >= 0.1 && kumaraWeight <= 50.0 && kumaraWeight <= currentStock {
@@ -44,7 +47,8 @@ struct SwiftPlayground {
 
         func calculateTotal(total: Double, kumaraWeight: Double) {
             var kumaraCost = kumaraWeight * 3
-            var bagCost = addBag(kumaraWeight: kumaraWeight) * 0.2
+            var bagCost = bagAmount * 0.2
+            var total = kumaraCost + bagCost
         }
 
         func sellKumara() {
@@ -60,7 +64,7 @@ struct SwiftPlayground {
             print("1. Add Kumara to stock")
             print("2. View current stock")
             print("3. View previous sales records")
-            print("4. Show cummary information")
+            print("4. Show Summary information")
             print("5. To quit")
 
             if let userInput = readLine(), let choice = Int(userInput) {
@@ -68,10 +72,14 @@ struct SwiftPlayground {
                     let userChoice = choice
                     switch userChoice {
                         case 1:
-                            addKumara(currentStock: currentStock, amount: amount)
+                            addKumara(currentStock: Double, amount: amount)
                         case 2:
+                            viewCurrentStock(currentStock: currentStock)
+                        case 3:
+
 
                         default: 
+                            print("Invalid answer. Try again.")
                             
                     }
                 }
@@ -105,6 +113,7 @@ struct SwiftPlayground {
                     }
                 }
             }
+
             func printUserMenu() {
             
                 print("Enter the number")
