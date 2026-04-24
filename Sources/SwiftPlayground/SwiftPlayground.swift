@@ -3,12 +3,27 @@ struct SwiftPlayground {
     static func main() {
 
         /// Allows owner to add kumara
-        func addKumara(currentStock: Int, amount: Int) -> Int {
-            var kumaraInStock = currentStock + amount
-            return kumaraInStock
-        }
+        func addKumara(currentStock: Double, amount: Double) -> Double {
+            print("How many Kumara would you like to add? ")
 
-        func viewCurrentStock(currentStock: Int) -> Int {
+            if let userInput = readLine(), let amount = Double(userInput) {
+                if amount <= 50.0 && amount >= 0.1 {
+                    if amount + currentStock <= currentStock {
+                        var kumaraInStock = currentStock + amount
+                        return kumaraInStock   
+                    } else {
+                        print("The container cannot hold that much. Enter another amount.")
+                    }
+                } else if amount >= 50 {
+                    print("The bin will overflow. Enter a valid amount.")
+                    addKumara(currentStock: currentStock, amount: amount)
+                } else {
+                    print("Invalid amount. Try again")
+                    addKumara(currentStock: currentStock, amount: amount)
+                }
+            }
+
+        func viewCurrentStock(currentStock: Double) -> Double {
             if currentStock <= 0 {
                 return currentStock
                 print("There are no kumara in Stock")
@@ -19,17 +34,17 @@ struct SwiftPlayground {
 
         func addBag(kumaraWeight: Double) {
             var bagAmount = kumaraWeight / 3
-            
         }
 
-        func checkKumaraWeigth(kumaraWeight: Double) -> String {
-            if let kumaraWeight >= 0.1 && kumaraWeight <= 50.0 && kumaraWeight <= currentStock {
-                return "The weight of your kumara is \(kumaraWeight)"
-            } 
-        }
+        //func checkKumaraWeigth(kumaraWeight: Double) -> String {
+          //  if let kumaraWeight >= 0.1 && kumaraWeight <= 50.0 && kumaraWeight <= currentStock {
+            //    return "The weight of your kumara is \(kumaraWeight)"
+            //} 
+        //}
 
         func calculateTotal(total: Double, kumaraWeight: Double) {
             var kumaraCost = kumaraWeight * 3
+            var bagCost = addBag(kumaraWeight: kumaraWeight) * 0.2
         }
 
         func sellKumara() {
@@ -46,6 +61,21 @@ struct SwiftPlayground {
             print("2. View current stock")
             print("3. View previous sales records")
             print("4. Show cummary information")
+            print("5. To quit")
+
+            if let userInput = readLine(), let choice = Int(userInput) {
+                if choice <= 5 && choice >= 1 {
+                    let userChoice = choice
+                    switch userChoice {
+                        case 1:
+                            addKumara(currentStock: currentStock, amount: amount)
+                        case 2:
+
+                        default: 
+                            
+                    }
+                }
+            }
         }
 
 
@@ -69,20 +99,21 @@ struct SwiftPlayground {
                     case 2:
                         printOwnerMenu()
                     case 3:
-                        
+                        isRunning = false
                     default:
                         print("Invalid choice, try again")
                     }
                 }
             }
-
             func printUserMenu() {
             
                 print("Enter the number")
                 print("1. Buy Kumara")
                 print("2. Print reciept")
+                print("3. To quit")
             }
         }
+        runKumaraStall()
     }
 }
 }
