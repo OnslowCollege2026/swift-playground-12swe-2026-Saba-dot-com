@@ -51,8 +51,8 @@ struct SwiftPlayground {
             var total = kumaraCost + bagCost
         }
 
-        func sellKumara() {
-
+        func buyKumara(kumaraWeight: Double) {
+            var kumaraCost = kumaraWeight * 3
         }
 
         func stallHistory(kumaraWeight: Double, bagAmount: Int) {
@@ -75,9 +75,7 @@ struct SwiftPlayground {
                             addKumara(currentStock: Double, amount: amount)
                         case 2:
                             viewCurrentStock(currentStock: currentStock)
-                        case 3:
-
-
+                        //case 3:
                         default: 
                             print("Invalid answer. Try again.")
                             
@@ -120,6 +118,20 @@ struct SwiftPlayground {
                 print("1. Buy Kumara")
                 print("2. Print reciept")
                 print("3. To quit")
+                
+                if let userInput = readLine(), let choice = Int(userInput) {
+                    if choice <= 5 && choice >= 1 {
+                        let userChoice = choice
+                        switch userChoice {
+                            case 1:
+                                buyKumara(kumaraWeight: Double)
+                            case 2:
+                                calculateTotal(total: Double, kumaraWeight: Double)
+                            default:
+                                print("Error")
+                        }
+                    }
+                }
             }
         }
         runKumaraStall()
