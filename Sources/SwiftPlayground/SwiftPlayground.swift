@@ -23,7 +23,7 @@ struct SwiftPlayground {
         }
 
         func checkKumaraWeigth(kumaraWeight: Double) -> String {
-            guard let kumaraWeight <= 0.1 && kumaraWeight >= 50.0 {
+            if let kumaraWeight >= 0.1 && kumaraWeight <= 50.0 && kumaraWeight <= currentStock {
                 return "The weight of your kumara is \(kumaraWeight)"
             } 
         }
@@ -44,8 +44,9 @@ struct SwiftPlayground {
 
     func runKumaraStall() {
         print("Welcome to the Kumara Stall")
+        print("Are you the owner or a user?: ")
 
-        func printMenu() {
+        func printUserMenu() {
         
             print("Enter the number")
             print("1. ")
