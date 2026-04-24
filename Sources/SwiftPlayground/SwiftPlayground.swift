@@ -44,7 +44,12 @@ struct SwiftPlayground {
 
     func runKumaraStall() {
         print("Welcome to the Kumara Stall")
-        print("Are you the owner or a user?: ")
+        print("Enter 1 if you are a customer: ")
+        print("Enter 2 if you are the owner: ")
+
+        if let userInput = readLine(), let choice = Int(userInput) {
+            if choice <= 2 && choice >= 1 {
+                let userChoice = choice
 
         func printUserMenu() {
         
