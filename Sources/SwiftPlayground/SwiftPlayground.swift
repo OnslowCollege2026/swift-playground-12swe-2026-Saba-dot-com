@@ -23,6 +23,7 @@ struct SwiftPlayground {
                     addKumara(currentStock: currentStock, amount: amount)
                 }
             }
+            return currentStock
         }
 
         func viewCurrentStock(currentStock: Double) -> Double {
@@ -47,12 +48,18 @@ struct SwiftPlayground {
 
         func calculateTotal(total: Double, kumaraWeight: Double) {
             var kumaraCost = kumaraWeight * 3
-            var bagCost = bagAmount * 0.2
-            var total = kumaraCost + bagCost
+            //var bagCost = bagAmount * 0.2
+            //var total = kumaraCost + bagCost
         }
 
-        func buyKumara(kumaraWeight: Double) {
-            var kumaraCost = kumaraWeight * 3
+        func buyKumara(kumaraWeight: Double, currentStock: Double) {
+            print("How much Kumara would you like to buy (Kg)? ")
+
+            if let userInput = readLine(), let kumaraWeight = Double(userInput) {
+                if kumaraWeight <= currentStock {
+                  var kumaraCost = kumaraWeight * 3
+                }
+            }
         }
 
         func stallHistory(kumaraWeight: Double, bagAmount: Int) {
@@ -71,10 +78,10 @@ struct SwiftPlayground {
                 if choice <= 5 && choice >= 1 {
                     let userChoice = choice
                     switch userChoice {
-                        case 1:
-                            addKumara(currentStock: Double, amount: amount)
-                        case 2:
-                            viewCurrentStock(currentStock: currentStock)
+                        //case 1:
+                            //addKumara(currentStock: Double, amount: amount)
+                        //case 2:
+                            //viewCurrentStock(currentStock: currentStock)
                         //case 3:
                         default: 
                             print("Invalid answer. Try again.")
@@ -96,7 +103,7 @@ struct SwiftPlayground {
             print("Enter 3 to quit.")
 
             if let userInput = readLine(), let choice = Int(userInput) {
-                if choice <= 2 && choice >= 1 {
+                if choice <= 3 && choice >= 1 {
                     let userChoice = choice
                     
                     switch userChoice {
@@ -109,11 +116,14 @@ struct SwiftPlayground {
                     default:
                         print("Invalid choice, try again")
                     }
+                } else {
+                    print("Please select a nnumber between 1 and 3.")
                 }
             }
 
             func printUserMenu() {
-            
+                
+                print("")
                 print("Enter the number")
                 print("1. Buy Kumara")
                 print("2. Print reciept")
@@ -124,9 +134,11 @@ struct SwiftPlayground {
                         let userChoice = choice
                         switch userChoice {
                             case 1:
-                                buyKumara(kumaraWeight: Double)
+                                print("Case 1 selected")
+                                //buyKumara(kumaraWeight: Double)
                             case 2:
-                                calculateTotal(total: Double, kumaraWeight: Double)
+                                print("Case 2 selected")
+                                //calculateTotal(total: Double, kumaraWeight: Double)
                             default:
                                 print("Error")
                         }
