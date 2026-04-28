@@ -1,19 +1,21 @@
 @main
 struct SwiftPlayground {
     static func main() {
+        let sales = ["Kumara", ""]
 
         /// Allows owner to add kumara
         /// If the amount the owner wants to add is more than 50kg (the max the bin can hold)
         /// Then the owner will be told and will need to enter a smaller amount
         /// The owner can only enter 
         /// If the owner enters an invalid amount (negative, a word ect), an error will show
-        func addKumara(currentStock: Double, amount: Double, totalStock: Double) -> Double {
+        func addKumara(currentStock: Double, amount: Double, totalStock: Double, to sales: inout [String]) -> Double {
             while true {
                 print("How many Kumara would you like to add?")
                 if let userInput = readLine(), let amount = Double(userInput), amount >= 1, amount <= 50 {
                     let totalStock = currentStock + amount
                     var currentStock = totalStock
                     print("\(amount) kumara have been added to the stock")
+                    sales.append()
                     return totalStock
                     } else if amount + currentStock > 50 {
                         print("The bin will overflow. Please add a smaller amount of Kumara.")
@@ -21,7 +23,6 @@ struct SwiftPlayground {
                         print("Please add a valid number")
                     }
                 }
-
             }
         /// Checks if the current stock is more than 0.0kg
         /// If the current stock is 0, then the user will be told
@@ -41,15 +42,10 @@ struct SwiftPlayground {
         }
         //var bagAmount = addBag(kumaraWeight:)
 
-        func checkKumaraWeigth(kumaraWeight: Double) {
-            if 
+
           //  if let kumaraWeight >= 0.1 && kumaraWeight <= 50.0 && kumaraWeight <= currentStock {
             //    return "The weight of your kumara is \(kumaraWeight)"
             //} 
-        }
-
-        func recordKumaraWeight(kumaraWeight: Double) {
-            
         }
 
         func calculateTotal(total: Double, kumaraWeight: Double) -> Double {
