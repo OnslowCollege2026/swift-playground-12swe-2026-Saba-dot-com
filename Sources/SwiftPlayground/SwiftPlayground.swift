@@ -2,8 +2,11 @@
 struct SwiftPlayground {
     static func main() {
         let sales = [(weight: Double, price: Double)]()
+        var bagSales = [(amount: Double, price: Double)]()
 
         var kumaraInStock = 10.0
+
+
 
         /// Allows owner to add kumara
         /// If the amount the owner wants to add is more than 50kg (the max the bin can hold)
@@ -11,15 +14,22 @@ struct SwiftPlayground {
         /// The owner can only enter 
         /// If the owner enters an invalid amount (negative, a word ect), an error will show
         func addKumara(currentStock: Double, amount: Double) -> Double {
-            while true {
+            if kumaraInStock == 50.0 {
+                print("Max amount of kumara in stock.")
+            } else {
+                while true {
                 print("How many Kumara would you like to add?")
-                if let userInput = readLine(), let amount = Double(userInput), amount >= 1, amount <= 50 {
+                while let userInput = readLine(), let amount = Double(userInput), amount >= 1.0, currentStock + amount <= 50.0 {
+                    // Adds the desired amount to the current stock, updating it
                     let totalStock = currentStock + amount
-                    var kumaraInStock = totalStock
+                    let currentStock = totalStock
 
-                    print("\(amount) kumara have been added to the stock")
+                    print("\(amount)kg of kumara have been added to the stock")
                     return totalStock
-                    } else if amount + currentStock > 50.0 {
+
+                    }  
+                    
+                    if amount + currentStock >= 51.0 {
                         print("The bin will overflow. Please add a smaller amount of Kumara.")
                     } else {
                         print("Please enter a valid number")
@@ -27,11 +37,17 @@ struct SwiftPlayground {
                     continue
                 }
             }
+            return kumaraInStock
+        }
 
         /// Checks if the current stock is more than 0.0kg
         /// If the current stock is 0, then the user will be told
         /// Otherwise the current stock of Kumara will be shown
         func viewCurrentStock(currentStock: Double) -> Double {
+
+            // Checks if current stock is not empty
+            // If it is empty, then it will tell the user
+            // Otherwise, outputs/prints the amount of kumara in stock
             if currentStock == 0 {
                 print("There are no kumara in Stock")
                 return currentStock
@@ -41,54 +57,71 @@ struct SwiftPlayground {
             }
         }
 
-        func addBag(kumaraWeight: Double) {
-            //var bagAmount = kumaraWeight / 3
-        }
-        //var bagAmount = addBag(kumaraWeight:)
-
-
-          //  if let kumaraWeight >= 0.1 && kumaraWeight <= 50.0 && kumaraWeight <= currentStock {
-            //    return "The weight of your kumara is \(kumaraWeight)"
-            //} 
-        
-
-        func calculateTotal(total: Double, kumaraWeight: Double) -> Double {
-            //var kumaraCost = kumaraWeight * 3
-            //var bagCost = bagAmount * 0.2
-            //var total = kumaraCost + bagCost
-            return total
-        }
-
         /// Asks the customer how much Kumara they want to buy
         /// If the customer wants to buy more than in stock or less than 0.1 kg, they will be told
         /// If they enter a negative amount or a string, they will also be told to try again
         /// Otherwise, if the customer enters a valid amount of Kumara then they continue back to the menu.
-        func buyKumara(kumaraWeight: Double, currentStock: Double) -> Double? {
-            // add to sales: inout (Double)
+        /// Checks whether there is any remaining kumara/ more than 5.0kg
+        /// If so, then it adds another bag and checks again if there is any remaining kumara
+        func buyKumara(kumaraWeight: Double, currentStock: Double, to sales: inout [(amount: Double, price: Double)]) -> Double? {
 
             while true {
-                print("How much Kumara would you like to buy (Kg)? ")
-
-                if let userInput = readLine(), let kumaraWeight = Double(userInput) {
-                    if kumaraWeight <= currentStock && kumaraWeight >= 0.1 {
-                        let kumaraCost = Double(kumaraWeight * 3.0)
-                        let bagAmount = Double(kumaraWeight/5.0)
-                        let bagCost = Double(bagAmount * 0.2)
-
-                        let newStock = currentStock - kumaraWeight
-                        currentStock == newStock
-                        print("Your total for \(kumaraWeight) kgs of Kumara: \(kumaraCost)")
-                        print("Cost of \(bagAmount) bags: \(bagCost)")
-                        //sales.append((weight: kumaraWeight, price: kumaraCost))
-                        
-                    } else if kumaraWeight < 0.1 {
-                        print("You cannot buy \(kumaraWeight) kgs of Kumara")
-                    }
-                } else if kumaraWeight > currentStock {
-                    print("There aren't enough kumara. Please try again")
+                // Checks if there is any kumara in stock, if not then the customer is taken back to main menu to add kumara first
+                if currentStock == 0.0 {
+                    print("You have 0kg of kumara in stock. Consider adding some first.")
+                    return currentStock
                 } else {
-                    print("Please enter a number: 0.100 or greater.")
+                    print("How much Kumara would you like to buy (Kg)? ")
+
+                    if let userInput = readLine(), let kumaraWeight = Double(userInput) {
+
+                        // Makes sure that the amount of kumara the customer wants to buy is in stock
+                        if kumaraWeight <= currentStock && kumaraWeight >= 0.1 {
+                            let maxBagHold = 5.0
+                            let pricePerKG = 5.0
+                            var remainingKumara = kumaraWeight
+                            var newStock = currentStock
+                            var bagAmount = 0
+
+                            let price = pricePerKG * maxBagHold
+
+                            // If the amount of kumara being bought is more than 5, 
+                            while remainingKumara >= 5.0 {
+                                remainingKumara -= kumaraWeight
+                                newStock -= maxBagHold
+                                bagAmount += 1
+
+                                let price = pricePerKG * 5.0
+                                bagSales.append((amount: maxBagHold, price: price))
+
+                                print("\(kumaraWeight)kg of Kumara sold for $\(price) in \(bagAmount) bag(s)")
+
+                            }
+                            
+                            if remainingKumara > 0.0 {
+                                newStock -= remainingKumara
+                                bagAmount += 1
+
+                                let price = remainingKumara * pricePerKG
+                                bagSales.append((amount: remainingKumara, price: price))
+
+                                print("\(remainingKumara)kg of kumara has been sold for $\(price) in \(bagAmount) bags")
+                            }
+                            kumaraInStock = newStock
+                            return newStock
+                            
+
+
+                        } else if kumaraWeight < 0.1 {
+                            print("You cannot buy \(kumaraWeight) kgs of Kumara")
+                        }
+                    } else if kumaraWeight > currentStock {
+                        print("There aren't enough kumara. Please try again")
+                    } else {
+                        print("Please enter a number: 0.100 or greater.")
+                    }
                 }
+
             }
         }
 
@@ -129,36 +162,37 @@ struct SwiftPlayground {
             if let userInput = readLine(), let choice = Int(userInput) {
                 if choice <= 6 && choice >= 1 {
 
-                        switch choice {
+                    switch choice {
 
-                            case 1:
-                                buyKumara(kumaraWeight: 0, currentStock: 0)!
-                                print("Case 1 has been selected")
+                        case 1:
+                        kumaraInStock = buyKumara(kumaraWeight: kumaraInStock, currentStock: 0, to: &bagSales)!
+                        
 
-                            case 2:
-                                kumaraInStock = addKumara(currentStock: kumaraInStock, amount: 0)
-                            
-                            case 3:
-                            viewCurrentStock(currentStock: kumaraInStock)
+                        case 2:
+                        kumaraInStock = addKumara(currentStock: kumaraInStock, amount: 0)
+                                
+                        case 3:
+                        viewCurrentStock(currentStock: kumaraInStock)
 
-                            case 4:
-                            viewSales(sales: sales)
+                        case 4:
+                        viewSales(sales: sales)
 
-                            case 5:
-                            print("Case 5 selected")
+                        case 5:
+                        print("Case 5 selected")
 
-                            case 6:
-                            running = false
+                        case 6:
+                        running = false
 
-                            default:
-                                print("Please try again.")
-                        }
+                        default:
+                        print("Please enter a number (1 - 6).")
                     }
-                    else {
-                        print("Please enter a number")
-                    }
+                } else {
+                    print("Please enter a number (1 - 6).")
                 }
+            } else {
+                print("Please enter a number")
             }
-
     }
+
+}
 }
