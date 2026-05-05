@@ -1,8 +1,11 @@
+import Foundation
 @main
 struct SwiftPlayground {
     static func main() {
-        let sales = [(weight: Double, price: Double)]()
-        var bagSales = [(amount: Double, price: Double)]()
+        var kumaraSales = [
+            
+        ]
+        var sales = [(kumaraAmount: Double, kumaraCost: Double, bagAmount: Int, bagCost: Double, totalCost: Double)]()
 
         var kumaraInStock = 10.0
 
@@ -78,35 +81,43 @@ struct SwiftPlayground {
                         // Makes sure that the amount of kumara the customer wants to buy is in stock
                         if kumaraWeight <= currentStock && kumaraWeight >= 0.1 {
                             let maxBagHold = 5.0
-                            let pricePerKG = 5.0
+                            let pricePerKG = 3.0
+                            let bagCost = 0.2
+
                             var remainingKumara = kumaraWeight
                             var newStock = currentStock
                             var bagAmount = 0
+                            var totalPrice = 0.0
 
-                            let price = pricePerKG * maxBagHold
+                            let kumaraPrice = pricePerKG * maxBagHold
 
-                            // If the amount of kumara being bought is more than 5, 
-                            while remainingKumara >= 5.0 {
+                            // If the amount of kumara being bought is exactly 5 kg or a multipule of 5, then add another bag
+                            while remainingKumara >= maxBagHold {
                                 remainingKumara -= kumaraWeight
                                 newStock -= maxBagHold
                                 bagAmount += 1
 
-                                let price = pricePerKG * 5.0
-                                bagSales.append((amount: maxBagHold, price: price))
+                                let price = (maxBagHold * pricePerKG) + bagCost
+                                totalPrice += price
 
                                 print("\(kumaraWeight)kg of Kumara sold for $\(price) in \(bagAmount) bag(s)")
 
                             }
                             
+                            // If the customer requires more than 1 bag, then add give them another bag.
                             if remainingKumara > 0.0 {
                                 newStock -= remainingKumara
                                 bagAmount += 1
 
                                 let price = remainingKumara * pricePerKG
-                                bagSales.append((amount: remainingKumara, price: price))
 
                                 print("\(remainingKumara)kg of kumara has been sold for $\(price) in \(bagAmount) bags")
                             }
+
+                            sales.append((kumaraAmount: kumaraWeight, kumaraCost: kumaraPrice, bagAmount: bagAmount, bagCost: bagCost, totalCost: totalPrice))
+                            
+                            print("\(kumaraWeight)kg of kumara sold for $\(totalPrice) in \(bagAmount) bag(s)")
+
                             kumaraInStock = newStock
                             return newStock
                             
@@ -129,7 +140,7 @@ struct SwiftPlayground {
             
         }
 
-        func viewSales(sales: [(weight: Double, price: Double)]) {
+        func viewSales(sales: [(kumaraAmount: Double, kumaraCost: Double, bagAmount: Int, bagCost: Double, totalCost: Double)]) {
             if sales.isEmpty {
                 print("No sales yet")
             } else {
@@ -138,7 +149,7 @@ struct SwiftPlayground {
 
 
                 for sale in sales {
-                    print("\(sale.weight)  |  $\(sale.price)")
+                    print("\(sale.kumaraAmount)  |  $\(sale.price)")
                 }
             }
             print("")
