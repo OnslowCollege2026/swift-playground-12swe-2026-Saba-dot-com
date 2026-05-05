@@ -174,7 +174,6 @@ struct SwiftPlayground {
         }
 
 
-
     var running = true
 
     while running {
