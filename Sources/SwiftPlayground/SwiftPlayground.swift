@@ -198,9 +198,11 @@ struct SwiftPlayground {
                         
 
                         case 2:
+                        
                         kumaraInStock = addKumara(currentStock: kumaraInStock, amount: 0)
                                 
                         case 3:
+                        // Show kumara in stock
                         viewCurrentStock(currentStock: kumaraInStock)
 
                         case 4:
