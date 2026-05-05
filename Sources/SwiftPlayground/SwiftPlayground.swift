@@ -2,12 +2,10 @@ import Foundation
 @main
 struct SwiftPlayground {
     static func main() {
-        var kumaraSales = [
-            
-        ]
-        var sales = [(kumaraAmount: Double, kumaraCost: Double, bagAmount: Int, bagCost: Double, totalCost: Double)]()
 
-        var kumaraInStock = 10.0
+        var sales = [(kumaraAmountSold: Double, kumaraCost: Double, bagAmount: Int, bagCost: Double, totalCost: Double)]()
+
+        var kumaraInStock = 0.0
 
 
 
@@ -19,25 +17,24 @@ struct SwiftPlayground {
         func addKumara(currentStock: Double, amount: Double) -> Double {
             if kumaraInStock == 50.0 {
                 print("Max amount of kumara in stock.")
+                return kumaraInStock
             } else {
                 while true {
                 print("How many Kumara would you like to add?")
-                while let userInput = readLine(), let amount = Double(userInput), amount >= 1.0, currentStock + amount <= 50.0 {
-                    // Adds the desired amount to the current stock, updating it
-                    let totalStock = currentStock + amount
-                    let currentStock = totalStock
+                    if let userInput = readLine(), let amount = Double(userInput) {
+                        if amount >= 1.0, currentStock + amount <= 50.0 {
+                        
+                            // Adds the desired amount to the current stock, updating it
+                            let currentStock = currentStock + amount
+                            
+                            print("\(amount)kg of kumara have been added to the stock")
+                            return currentStock
 
-                    print("\(amount)kg of kumara have been added to the stock")
-                    return totalStock
-
-                    }  
-                    
-                    if amount + currentStock >= 51.0 {
-                        print("The bin will overflow. Please add a smaller amount of Kumara.")
-                    } else {
+                        } else {
                         print("Please enter a valid number")
+                        }
+                    
                     }
-                    continue
                 }
             }
             return kumaraInStock
@@ -66,7 +63,7 @@ struct SwiftPlayground {
         /// Otherwise, if the customer enters a valid amount of Kumara then they continue back to the menu.
         /// Checks whether there is any remaining kumara/ more than 5.0kg
         /// If so, then it adds another bag and checks again if there is any remaining kumara
-        func buyKumara(kumaraWeight: Double, currentStock: Double, to sales: inout [(amount: Double, price: Double)]) -> Double? {
+        func buyKumara(kumaraWeight: Double, currentStock: Double, to sales: inout [(kumaraAmountSold: Double, kumaraCost: Double, bagAmount: Int, bagCost: Double, totalCost: Double)]) -> Double? {
 
             while true {
                 // Checks if there is any kumara in stock, if not then the customer is taken back to main menu to add kumara first
@@ -114,7 +111,7 @@ struct SwiftPlayground {
                                 print("\(remainingKumara)kg of kumara has been sold for $\(price) in \(bagAmount) bags")
                             }
 
-                            sales.append((kumaraAmount: kumaraWeight, kumaraCost: kumaraPrice, bagAmount: bagAmount, bagCost: bagCost, totalCost: totalPrice))
+                            sales.append((kumaraAmountSold: kumaraWeight, kumaraCost: kumaraPrice, bagAmount: bagAmount, bagCost: bagCost, totalCost: totalPrice))
                             
                             print("\(kumaraWeight)kg of kumara sold for $\(totalPrice) in \(bagAmount) bag(s)")
 
@@ -136,23 +133,44 @@ struct SwiftPlayground {
             }
         }
 
-        func stallHistory(kumaraWeight: Double, bagAmount: Int) {
-            
-        }
+        func viewSales(sales: [(kumaraAmountSold: Double, kumaraCost: Double, bagAmount: Int, bagCost: Double, totalCost: Double)]) -> Double? {
+            let running = 0.0
 
-        func viewSales(sales: [(kumaraAmount: Double, kumaraCost: Double, bagAmount: Int, bagCost: Double, totalCost: Double)]) {
+
             if sales.isEmpty {
-                print("No sales yet")
-            } else {
-            print("======SALES======")
-            print(" WEIGHT  |  PRICE ")
+                print("No sales")
+                return running
+            }
+
+
+            print("SALES:   ")
+            print("")
+            print(" KUMARA  |  BAGS  |  COST OF KUMARA  |  COST OF BAGS  |  TOTAL COST ")
 
 
                 for sale in sales {
-                    print("\(sale.kumaraAmount)  |  $\(sale.price)")
+                print(" \(sale.kumaraAmountSold)    \(sale.bagAmount)      $\(sale.kumaraCost)      $\(sale.bagCost)       $\(sale.totalCost)")
                 }
-            }
             print("")
+            return running
+        }
+
+
+        func calculateAveCostPerBag(sales: [(kumaraAmountSold: Double, kumaraCost: Double, bagAmount: Int, bagCost: Double, totalCost: Double)]) -> Double? {
+            var total = 0.0
+
+            if sales.isEmpty {
+                print("No sales yet...")
+                return total
+            }
+
+            for sale in sales {
+                total += sale.totalCost
+            }
+
+            let average = Double(total) / Double(sales.count)
+            print("Average price of eggs sold: $\(average)")
+            return average
         }
 
 
@@ -176,7 +194,7 @@ struct SwiftPlayground {
                     switch choice {
 
                         case 1:
-                        kumaraInStock = buyKumara(kumaraWeight: kumaraInStock, currentStock: 0, to: &bagSales)!
+                        kumaraInStock = buyKumara(kumaraWeight: kumaraInStock, currentStock: 0, to: &sales)!
                         
 
                         case 2:
@@ -189,7 +207,7 @@ struct SwiftPlayground {
                         viewSales(sales: sales)
 
                         case 5:
-                        print("Case 5 selected")
+                        calculateAveCostPerBag(sales: sales)
 
                         case 6:
                         running = false
